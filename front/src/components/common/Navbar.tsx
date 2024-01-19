@@ -4,9 +4,22 @@ import { NavLink, Link } from "react-router-dom";
 import { navLinks } from "../../lib/constants";
 import { cn } from "../../lib/utils";
 import logo from "/logo.png";
+import useAuth from "../../hooks/useAuth";
 
 type NavbarProps = ComponentProps<"div">;
 const Navbar = ({ className }: NavbarProps) => {
+  const { auth, setAuth } = useAuth();
+
+  const logout = async () => {
+    await fetch("http://localhost:8000/api/logout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    });
+
+    setAuth({ logged: false });
+  };
+
   return (
     <div
       className={cn(
@@ -20,7 +33,7 @@ const Navbar = ({ className }: NavbarProps) => {
         </Link>
         <ul className="relative flex font-semibold">
           {navLinks.map((link) => (
-            <li className="" key={link.label}>
+            <li key={link.label}>
               <NavLink
                 to={link.url}
                 className={cn(
@@ -33,6 +46,30 @@ const Navbar = ({ className }: NavbarProps) => {
               </NavLink>
             </li>
           ))}
+          {auth.logged ? (
+            <NavLink
+              to="/"
+              onClick={logout}
+              className={cn(
+                "border-t-indigo-900 px-5 text-indigo-800 hover:border-t-4 hover:text-indigo-900",
+                ({ isActive }: { isActive: boolean }) =>
+                  isActive ? "text-indigo-900" : "text-indigo-800",
+              )}
+            >
+              خروج
+            </NavLink>
+          ):(
+            <NavLink
+              to="/login"
+              className={cn(
+                "border-t-indigo-900 px-5 text-indigo-800 hover:border-t-4 hover:text-indigo-900",
+                ({ isActive }: { isActive: boolean }) =>
+                  isActive ? "text-indigo-900" : "text-indigo-800",
+              )}
+            >
+              دخول
+            </NavLink>
+          )}
         </ul>
       </div>
       <Link

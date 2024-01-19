@@ -22,7 +22,7 @@ const Register = () => {
       });
   
       reset();
-      go('/login');
+      go('/login', { replace: true });
     } catch (error) {
       console.error("There was register error!", error);
     }

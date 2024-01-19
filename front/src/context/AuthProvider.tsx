@@ -1,14 +1,13 @@
 import { type ReactNode, createContext, useState } from "react";
 
 export type ContextType = {
-  auth: UserAuth,
-  setAuth: React.Dispatch<React.SetStateAction<UserAuth>>
+  auth: AuthState,
+  setAuth: React.Dispatch<React.SetStateAction<AuthState>>
 }
-const AuthContext = createContext<ContextType| null>(null);
+const AuthContext = createContext<ContextType | null>(null);
 
-export type UserAuth = {
-  email?: string;
-  password?: string;
+export type AuthState = {
+  logged?: boolean;
 };
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {

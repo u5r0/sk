@@ -1,20 +1,20 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { type FieldValues, useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
   const go = useNavigate();
+  const location = useLocation();
   const { setAuth } = useAuth();
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    reset,
   } = useForm();
 
   const submit = async (data: FieldValues) => {
-    console.log({ ...data });
+    console.log(data);
     try {
       await fetch("http://localhost:8000/api/login", {
         method: "POST",
@@ -23,9 +23,8 @@ const Login = () => {
         headers: { "Content-Type": "application/json" },
       });
 
-      reset();
-      setAuth({ ...data });
-      go("/dashboard");
+      setAuth({ logged: true });
+      go("/dashboard", { replace: true, state: location.state });
     } catch (error) {
       console.error("There was login error!", error);
     }

@@ -11,3 +11,4 @@ export { default as Page } from "./landing";
 export { default as Dashboard } from "../pages/Dashboard.tsx";
 export { default as Prices } from "../pages/Prices.tsx";
 export { default as Blogs } from "../pages/Blogs.tsx";
+export { default as Contact } from "../pages/Contact.tsx";

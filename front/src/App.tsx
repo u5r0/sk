@@ -9,6 +9,7 @@ import {
   RequireAuth,
   Blogs,
   Prices,
+  Contact,
 } from "./components";
 
 function App() {
@@ -17,10 +18,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Page />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
           <Route path="/prices" element={<Prices />} />
           <Route path="/blogs" element={<Blogs />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
 
           <Route element={<RequireAuth />}>
             <Route path="/dashboard" element={<Dashboard />} />

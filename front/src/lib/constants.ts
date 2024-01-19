@@ -9,18 +9,14 @@ export const navLinks = [
   },
   {
     label: "الأسعار",
-    url: "prices",
+    url: "/prices",
   },
   {
     label: "المدونات",
-    url: "blogs",
+    url: "/blogs",
   },
   {
     label: "تواصل معنا",
-    url: "contact",
-  },
-  {
-    label: "دخول",
-    url: "login",
+    url: "/contact",
   },
 ];
