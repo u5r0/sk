@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: sans;
+    src: url("public/alfont_com_bold.ttf") format("truetype");
+  }
+}
