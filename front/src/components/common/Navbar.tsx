@@ -11,13 +11,20 @@ const Navbar = ({ className }: NavbarProps) => {
   const { auth, setAuth } = useAuth();
 
   const logout = async () => {
-    await fetch("http://localhost:8000/api/logout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    });
+    try {
+      const res = await fetch("http://localhost:8000/api/logout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
 
-    setAuth({ logged: false });
+      if (!res.ok) {
+        console.log(res.status, res.statusText);
+      }
+      setAuth({ logged: false });
+    } catch (error) {
+      console.error("There was a logout error!", error);
+    }
   };
 
   return (
@@ -58,7 +65,7 @@ const Navbar = ({ className }: NavbarProps) => {
             >
               خروج
             </NavLink>
-          ):(
+          ) : (
             <NavLink
               to="/login"
               className={cn(

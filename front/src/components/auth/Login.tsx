@@ -11,22 +11,28 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    reset,
   } = useForm();
 
   const submit = async (data: FieldValues) => {
     console.log(data);
     try {
-      await fetch("http://localhost:8000/api/login", {
+      const res = await fetch("http://localhost:8000/api/login", {
         method: "POST",
         credentials: "include",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },
       });
 
-      setAuth({ logged: true });
-      go("/dashboard", { replace: true, state: location.state });
+      if (!res.ok) {
+        console.log(res.status, res.statusText);
+        reset();
+      } else {
+        setAuth({ logged: true });
+        go("/dashboard", { replace: true, state: location.state });
+      }
     } catch (error) {
-      console.error("There was login error!", error);
+      console.error("There was a login error!", error);
     }
   };
 

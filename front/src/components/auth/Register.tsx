@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { type FieldValues, useForm } from "react-hook-form";
 
 const Register = () => {
-  const go = useNavigate()
+  const go = useNavigate();
 
   const {
     register,
@@ -13,18 +13,22 @@ const Register = () => {
   } = useForm();
 
   const submit = async (data: FieldValues) => {
-    console.log(JSON.stringify(data))
+    console.log(JSON.stringify(data));
     try {
-      await fetch("http://localhost:8000/api/register", {
+      const res = await fetch("http://localhost:8000/api/register", {
         method: "POST",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },
       });
-  
-      reset();
-      go('/login', { replace: true });
+
+      if (!res.ok) {
+        console.log(res.status, res.statusText);
+      } else {
+        reset();
+        go("/login", { replace: true });
+      }
     } catch (error) {
-      console.error("There was register error!", error);
+      console.error("There was a register error!", error);
     }
   };
 
