@@ -22,7 +22,7 @@ php artisan serve
 - Useful VSCode extensions:
   - rangav.vscode-thunder-client (api testing)
   - cweijan.vscode-database-client2 (database GUI)
-- Adjust following fields according to your setup
+- Adjust `.env` according to your setup
 ```sh
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
