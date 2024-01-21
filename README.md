@@ -36,3 +36,9 @@ DB_PASSWORD=<db_password>
 ``` 
 php artisan migrate 
 ``` 
+#### Open DevTools: `console and cookies`
+- **Test**:
+  - http://localhost:5173/register
+  - http://localhost:5173/login
+
+---
